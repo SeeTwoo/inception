@@ -1,7 +1,6 @@
 #!/bin/sh
 
 set -e
-echo "pre if"
 if [ ! -d "/var/lib/mysql/mysql/${SQL_DATABASE}" ]; then
     chown -R mysql:mysql /var/lib/mysql
     mysql_install_db --user=mysql --datadir=/var/lib/mysql > /dev/null
@@ -15,9 +14,8 @@ cat << EOF > /tmp/init.sql
     FLUSH PRIVILEGES;
 EOF
 
-echo "script creer"
     exec mysqld_safe --init-file=/tmp/init.sql
 else
     exec mysqld_safe
 fi
-echo "script entrypoint executer"
+echo "entrypoint script executed"
