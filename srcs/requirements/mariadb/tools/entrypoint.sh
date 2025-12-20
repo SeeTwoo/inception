@@ -4,7 +4,7 @@ set -e
 if [ ! -d "/var/lib/mysql/mysql/${SQL_DATABASE}" ]; then
     chown -R mysql:mysql /var/lib/mysql
     mysql_install_db --user=mysql --datadir=/var/lib/mysql > /dev/null
-echo "install mysql ok"
+    echo "install mysql ok"
 
 cat << EOF > /tmp/init.sql
     CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;
@@ -13,7 +13,7 @@ cat << EOF > /tmp/init.sql
     ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PASSWORD}';
     FLUSH PRIVILEGES;
 EOF
-
+    echo "before executing mysql"
     exec mysqld_safe --init-file=/tmp/init.sql
 else
     exec mysqld_safe
