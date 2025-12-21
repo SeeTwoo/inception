@@ -1,5 +1,3 @@
-# Makefile
-
 COMPOSE=docker compose -f srcs/docker-compose.yml --env-file srcs/.env
 
 build:
@@ -12,6 +10,8 @@ clean:
 	sudo rm -rf /data/mariadb/*
 	sudo rm -rf /data/wordpress/*
 	sudo docker system prune -af
+
+fclean: down clean
 
 re: remove build
 
